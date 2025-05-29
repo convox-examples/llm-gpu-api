@@ -1,0 +1,22 @@
+[
+  {
+    "id": 101,
+    "type": "g4dn.xlarge",
+    "capacity_type": "ON_DEMAND",
+    "min_size": 0,
+    "max_size": 5,
+    "dedicated": true,
+    "label": "gpu-inference",
+    "tags": "workload=llm-inference,environment=production,cost-center=ai"
+  },
+  {
+    "id": 102,
+    "type": "g4dn.2xlarge",
+    "capacity_type": "SPOT",
+    "min_size": 0,
+    "max_size": 3,
+    "dedicated": true,
+    "label": "gpu-inference-large",
+    "tags": "workload=llm-inference-large,environment=production,cost-center=ai"
+  }
+]

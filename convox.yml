@@ -1,0 +1,42 @@
+environment:
+  - PORT=8000
+  - MODEL_NAME=microsoft/DialoGPT-medium
+  - MAX_MEMORY_GB=12
+  - CUDA_VISIBLE_DEVICES=0
+  - TRANSFORMERS_CACHE=/tmp/.transformers
+  - TORCH_HOME=/tmp/.torch
+
+resources:
+  cache:
+    type: redis
+  # For production systems that need persistent model storage
+  # Uncomment and configure these resources:
+  # database:
+  #   type: postgres  # For training data, user interactions, model metadata
+  # storage:
+  #   type: s3  # For model checkpoints, datasets, fine-tuned models
+
+services:
+  api:
+    build: .
+    port: 8000
+    health:
+      path: /health
+      grace: 180  # GPU models need more time to load
+      timeout: 60
+      interval: 30
+    resources:
+      - cache
+    nodeSelectorLabels:
+      convox.io/label: gpu-inference   # Target GPU nodes for inference workloads
+    scale:
+      count: 1-5
+      cpu: 3500    # 3.5 CPU cores
+      memory: 14336 # 14GB RAM
+      gpu: 1       # 1 GPU per instance
+      targets:
+        cpu: 70
+        memory: 75
+    termination:
+      grace: 90
+    timeout: 600  # Longer timeout for LLM inference
