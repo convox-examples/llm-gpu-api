@@ -327,12 +327,6 @@ python test_api.py http://localhost:8000
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🆘 Support
-
-- [Convox Community Slack](https://invite.convox.com)
-- [GitHub Issues](https://github.com/convox-examples/llm-gpu-api/issues)
-- [Convox Support](https://convox.com/support)
-
 ---
 
 **Ready to deploy your own GPU-accelerated LLM API?** 
